@@ -279,7 +279,7 @@
 
     <!-- HALAMAN AWAL (FORM IDENTITAS) -->
     <div class="start-screen" id="startScreen">
-        <h1 id="gameTitle">Game Swara Jejeg Miring</h1>
+        <h1 id="gameTitle">Games Swara Jejeg Miring</h1>
         <h2>Isi Identitas Siswa</h2>
         <form id="studentForm">
             <div class="form-group">
@@ -325,7 +325,7 @@
             
             <div class="form-group" id="passContainer" style="display: none;">
                 <label for="teacherPass">5. Token Ujian (Dari Guru):</label>
-                <input type="password" id="teacherPass" placeholder="Masukkan token">
+                <input type="password" id="teacherPass" placeholder="Masukkan token" autocapitalize="off" autocorrect="off" spellcheck="false">
             </div>
             
             <button type="button" class="btn-start" id="startBtn">MULAI MAIN</button>
@@ -412,8 +412,8 @@
                 .then(data => {
                     if (data) {
                         if (data.Password) {
-                            TOKEN_SUMATIF = String(data.Password);
-                            activePassword = String(data.Password);
+                            TOKEN_SUMATIF = String(data.Password).trim();
+                            activePassword = String(data.Password).trim();
                         }
                         if (data.WaktuGame && !isNaN(data.WaktuGame)) {
                             GAME_TIMER = Number(data.WaktuGame);
@@ -700,12 +700,27 @@
                 showAlert("Nuwun sewu, isi No Absen, Nama, lan Kelas rumiyin!");
                 return;
             }
-
+/*
             if (inputMode === "Sumatif" && (inputPass !== TOKEN_SUMATIF && inputPass !== activePassword)) {
                 showAlert("❌ Token Ujian Sumatif Salah! Hubungi guru Anda.");
                 return;
             }
+*/
+if (inputMode === "Sumatif") {
+    const cleanInput = inputPass.toUpperCase().trim();
+    const cleanToken = TOKEN_SUMATIF.toUpperCase().trim();
+    const cleanActive = activePassword.toUpperCase().trim();
 
+    if (cleanInput !== cleanToken && cleanInput !== cleanActive) {
+        showAlert("❌ Token Ujian Sumatif Salah! Hubungi guru Anda.");
+        return;
+    }
+}
+
+
+
+
+            
             absenSiswa = inputAbsen;
             namaSiswa = inputName;
             kelasSiswa = inputKelas;
