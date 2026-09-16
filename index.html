@@ -279,7 +279,7 @@
 
     <!-- HALAMAN AWAL (FORM IDENTITAS) -->
     <div class="start-screen" id="startScreen">
-        <h1 id="gameTitle">Games Swara Jejeg Miring</h1>
+        <h1 id="gameTitle">Game Swara Jejeg Miring</h1>
         <h2>Isi Identitas Siswa</h2>
         <form id="studentForm">
             <div class="form-group">
@@ -393,8 +393,12 @@
         
         let TOKEN_SUMATIF = "JAWA2026"; 
         let activePassword = "JAWA2026"; 
-        let GAME_TIMER = 60;          
-        let TOTAL_SOAL_GAME = 10;     
+      //  let GAME_TIMER = 60;          
+      //  let TOTAL_SOAL_GAME = 10;     
+let GAME_TIMER = Number(localStorage.getItem("GAME_TIMER")) || 60;          
+let TOTAL_SOAL_GAME = Number(localStorage.getItem("TOTAL_SOAL_GAME")) || 10;
+        
+
         
         // Memori Preloading Soal
         let cachedQuestions = [];
